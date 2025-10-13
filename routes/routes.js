@@ -1,10 +1,5 @@
-// Importação dos controladores que gerenciarão a lógica de cada rota
-const Joi = require('joi');
-const { home, addComment, addPainting, getPaintingController, updatePaintingController, editPaintingController } = require('../controllers/home');
-const { portinari } = require('../controllers/portinari');
-const { tarsila } = require('../controllers/tarsila');
-
 // Importação dos controladores do cardápio
+const Joi = require('joi');
 const { 
     listAllItems, 
     listByCategory, 
@@ -15,32 +10,6 @@ const {
     updateItemController,
     deleteItemController 
 } = require('../controllers/cardapio');
-
-const schema = Joi.object({
-    nome: Joi.string().min(5).max(100).required().messages({
-        'string.empty': 'O nome é obrigatório',
-        'string.min': 'O nome deve ter no mínimo 5 caracteres',
-        'string.max': 'O nome deve ter no máximo 100 caracteres',
-        'any.required': 'O nome é obrigatório'
-    }),
-    ano: Joi.number().integer().min(1900).max(new Date().getFullYear()).required().messages({
-        'number.base': 'O ano deve ser um número',
-        'number.min': 'O ano deve ser maior ou igual a 1900',
-        'number.max': `O ano deve ser menor ou igual a ${new Date().getFullYear()}`,
-        'any.required': 'O ano é obrigatório'
-    }),
-    artista: Joi.string().min(5).max(100).required().messages({
-        'string.empty': 'O artista é obrigatório',
-        'string.min': 'O nome do artista deve ter no mínimo 5 caracteres',
-        'string.max': 'O nome do artista deve ter no máximo 100 caracteres',
-        'any.required': 'O artista é obrigatório'
-    }),
-    urlimagem: Joi.string().uri().required().messages({
-        'string.empty': 'A URL da imagem é obrigatória',
-        'string.uri': 'A URL da imagem deve ser válida',
-        'any.required': 'A URL da imagem é obrigatória'
-    })
-});
 
 // Schema de validação para itens do cardápio
 const cardapioSchema = Joi.object({
@@ -73,14 +42,6 @@ const cardapioSchema = Joi.object({
     })
 });
 
-const validatePainting = (req, res, next) => {
-    const { error } = schema.validate(req.body);
-    if (error) {
-        return res.render('insertPaintings.ejs', { errors: error.details, painting: req.body });
-    }
-    next();
-};
-
 const validateCardapio = (req, res, next) => {
     const { error } = cardapioSchema.validate(req.body);
     if (error) {
@@ -91,72 +52,6 @@ const validateCardapio = (req, res, next) => {
 
 // Exportação do módulo que define as rotas do aplicativo
 module.exports = {
-    // ==================== ROTAS DO MUSEU ====================
-    
-    // Página inicial
-    home: (app) => {
-        app.get('/', (req, res) => {
-            home(app, req, res);
-        });
-    },
-
-    // Salvar comentários
-    saveComment: (app) => {
-        app.post('/comentario/salvar', (req, res) => {
-            addComment(app, req, res);
-        });
-    },
-
-    // Página Tarsila
-    tarsila: (app) => {
-        console.log('[routes.js] criando rota/tarsila');
-        app.get('/tarsila', (req, res) => {
-            tarsila(app, req, res);
-        });
-    },
-
-    // Página Portinari
-    portinari: (app) => {
-        console.log('[routes.js] criando rota/portinari');
-        app.get('/portinari', (req, res) => {
-            portinari(app, req, res);
-        });
-    },
-
-    // Form inserir obra
-    insertPaintings: (app) => {
-        app.get('/inserirobra', (req, res) => {
-            res.render('insertPaintings', { errors: [], painting: {} });
-        });
-    },
-
-    // Salvar obra
-    savePaintings: (app) => {
-        app.post('/obra/salvar', validatePainting, (req, res) => {
-            console.log('Rota add paintings chamada');
-            addPainting(app, req, res);
-        });
-    },
-
-    // Mostrar obra individual
-    getPainting: (app) => {
-        app.get('/obradearte', (req, res) => {
-            getPaintingController(app, req, res);
-        });
-    },
-
-    editPainting: (app) => {
-        app.get('/paintings/:idobra/edit', (req, res) => {
-            editPaintingController(app, req, res);
-        });
-    },
-
-    updatePainting: (app) => {
-        app.post('/paintings/:idobra/atualizar', (req, res) => {
-            updatePaintingController(app, req, res);
-        });
-    },
-
     // ==================== ROTAS DO CARDÁPIO ====================
 
     // Listar todos os itens do cardápio
