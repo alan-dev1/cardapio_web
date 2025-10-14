@@ -1,0 +1,43 @@
+-- =========================================================
+-- BANCO DE DADOS: cardapio_restaurante
+-- =========================================================
+CREATE DATABASE IF NOT EXISTS cardapio_restaurante
+CHARACTER SET utf8mb4
+COLLATE utf8mb4_general_ci;
+
+USE cardapio_restaurante;
+
+-- =========================================================
+-- TABELA: produtos
+-- =========================================================
+CREATE TABLE IF NOT EXISTS produtos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    descricao TEXT NOT NULL,
+    preco DECIMAL(10,2) NOT NULL,
+    imagem VARCHAR(255) DEFAULT '/images/default.png',
+    categoria ENUM('Lanches', 'Bebidas') NOT NULL,
+    data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB;
+
+-- =========================================================
+-- INSERINDO LANCHES
+-- =========================================================
+INSERT INTO produtos (nome, descricao, preco, imagem, categoria) VALUES
+('Lanche 1', 'Hambúrguer artesanal com carne bovina, queijo, alface, tomate e molho especial da casa', 25.90, '/images/lanche1.jpg', 'Lanches'),
+('Lanche 2', 'X-Bacon com dupla carne, bacon crocante, queijo derretido e cebola caramelizada', 28.50, '/images/lanche2.jpg', 'Lanches'),
+('Lanche 3', 'Chicken Burger com frango grelhado, queijo mussarela, alface e maionese temperada', 22.90, '/images/lanche3.jpg', 'Lanches'),
+('Lanche 4', 'Veggie Burger com hambúrguer de grão-de-bico, queijo vegano e vegetais frescos', 24.90, '/images/lanche4.jpg', 'Lanches'),
+('Lanche 5', 'Fish Burger com filé de peixe empanado, queijo e molho tártaro caseiro', 26.90, '/images/lanche5.jpg', 'Lanches'),
+('Lanche 6', 'BBQ Burger com carne defumada, cebola roxa, picles e molho barbecue artesanal', 29.90, '/images/lanche6.jpg', 'Lanches');
+
+-- =========================================================
+-- INSERINDO BEBIDAS
+-- =========================================================
+INSERT INTO produtos (nome, descricao, preco, imagem, categoria) VALUES
+('Bebida 1', 'Refrigerante de cola gelado, ideal para acompanhar seus lanches favoritos', 5.90, '/images/bebida1.jpg', 'Bebidas'),
+('Bebida 2', 'Suco natural de laranja, feito na hora com frutas selecionadas', 8.50, '/images/bebida2.jpg', 'Bebidas'),
+('Bebida 3', 'Água mineral sem gás, refrescante e pura para matar sua sede', 3.90, '/images/bebida3.jpg', 'Bebidas'),
+('Bebida 4', 'Milkshake de chocolate cremoso com chantilly e calda especial', 12.90, '/images/bebida4.jpg', 'Bebidas'),
+('Bebida 5', 'Café expresso premium, encorpado e aromático para os amantes do café', 6.50, '/images/bebida5.jpg', 'Bebidas'),
+('Bebida 6', 'Smoothie de frutas vermelhas com iogurte natural e granola crocante', 14.90, '/images/bebida6.jpg', 'Bebidas');
