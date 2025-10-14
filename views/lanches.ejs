@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Cardápio Digital - Lanches </title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navigation">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="/">🍔 Cardápio</a>
+            </div>
+            <div class="nav-links">
+                <a href="/" class="nav-link">Página Principal</a>
+                <a href="/lanches" class="nav-link active">Lanches</a>
+                <a href="/bebidas" class="nav-link">Bebidas</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1 class="page-title">🍔 Nossos Lanches</h1>
+                <p class="page-description">
+                    Deliciosos hambúrgueres artesanais preparados com ingredientes frescos e de qualidade
+                </p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="products-grid products-grid-full">
+
+                    <% if (lanches && lanches.length > 0) { %>
+                        <% lanches.forEach(lanche => { %>
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <img src="<%= lanche.imagem %>" alt="<%= lanche.nome %>">
+                                </div>
+                                <div class="product-content">
+                                    <h3 class="product-name"><%= lanche.nome %></h3>
+                                    <p class="product-description"><%= lanche.descricao %></p>
+                                    <div class="product-footer">
+                                        <span class="product-price">R$ <%= lanche.preco.toFixed(2).replace('.', ',') %></span>
+                                        <button class="btn-add">Adicionar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        <% }) %>
+                    <% } else { %>
+                        <p>Nenhum lanche cadastrado ainda.</p>
+                    <% } %>
+
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+

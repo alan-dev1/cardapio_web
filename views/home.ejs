@@ -1,11 +1,116 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Cardápio Digital - Página Principal</title>
+    <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-    Home!
+    <!-- Navigation -->
+    <nav class="navigation">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="/">🍔 Cardápio</a>
+            </div>
+            <div class="nav-links">
+                <a href="/" class="nav-link active">Página Principal</a>
+                <a href="/lanches" class="nav-link">Lanches</a>
+                <a href="/bebidas" class="nav-link">Bebidas</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h1 class="hero-title">
+                    🍔 Bem-vindo ao nosso
+                    <span class="hero-accent">Cardápio Digital</span>
+                </h1>
+                <p class="hero-description">
+                    Descubra sabores únicos e ingredientes frescos em cada mordida. 
+                    Explore nosso menu completo com lanches artesanais e bebidas especiais.
+                </p>
+                <div class="hero-buttons">
+                    <a href="/lanches" class="btn btn-primary">Ver Lanches</a>
+                    <a href="/bebidas" class="btn btn-secondary">Ver Bebidas</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Destaques Lanches -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">🔥 Lanches em Destaque</h2>
+                    <p class="section-description">Os queridinhos dos nossos clientes</p>
+                </div>
+                
+                <div class="products-grid">
+                    <% if (lanches && lanches.length > 0) { %>
+                        <% lanches.forEach(lanche => { %>
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <img src="<%= lanche.imagem %>" alt="<%= lanche.nome %>">
+                                </div>
+                                <div class="product-content">
+                                    <h3 class="product-name"><%= lanche.nome %></h3>
+                                    <p class="product-description"><%= lanche.descricao %></p>
+                                    <div class="product-footer">
+                                        <span class="product-price">R$ <%= lanche.preco.toFixed(2) %></span>
+                                        <button class="btn-add">Adicionar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        <% }) %>
+                    <% } else { %>
+                        <p class="empty">Nenhum lanche disponível no momento.</p>
+                    <% } %>
+                </div>
+
+                <div class="section-link">
+                    <a href="/lanches">Ver todos os lanches →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Destaques Bebidas -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">🥤 Bebidas Especiais</h2>
+                    <p class="section-description">Refrescantes e saborosas para acompanhar</p>
+                </div>
+                
+                <div class="products-grid">
+                    <% if (bebidas && bebidas.length > 0) { %>
+                        <% bebidas.forEach(bebida => { %>
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <img src="<%= bebida.imagem %>" alt="<%= bebida.nome %>">
+                                </div>
+                                <div class="product-content">
+                                    <h3 class="product-name"><%= bebida.nome %></h3>
+                                    <p class="product-description"><%= bebida.descricao %></p>
+                                    <div class="product-footer">
+                                        <span class="product-price">R$ <%= bebida.preco.toFixed(2) %></span>
+                                        <button class="btn-add">Adicionar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        <% }) %>
+                    <% } else { %>
+                        <p class="empty">Nenhuma bebida disponível no momento.</p>
+                    <% } %>
+                </div>
+
+                <div class="section-link">
+                    <a href="/bebidas">Ver todas as bebidas →</a>
+                </div>
+            </div>
+        </section>
+    </main>
 </body>
 </html>
