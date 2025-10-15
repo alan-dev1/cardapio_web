@@ -1,12 +1,24 @@
-const app = require('./config/serve');
-const routes = require('./app/routes/routes');
+// index.js
+const express = require('express');
+const routes = require('./app/routes/routes'); // Importa as rotas
 
-// ==================== ROTAS DO CARDÁPIO ====================
-routes.cardapioList(app);
-routes.cardapioByCategory(app);
-routes.cardapioItem(app);
-routes.cardapioAddForm(app);
-routes.cardapioSave(app);
-routes.cardapioEditForm(app);
-routes.cardapioUpdate(app);
-routes.cardapioDelete(app);
+const app = express();
+const port = 3000;
+
+// Configurações básicas
+app.set('view engine', 'ejs');
+app.set('views', './app/views'); // Local das views
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static('./public')); // Pasta de arquivos estáticos (CSS, imagens, etc.)
+
+// Chamada das rotas 
+routes.home(app);
+routes.lanches(app);
+routes.bebidas(app);
+
+
+// Inicialização do servidor
+app.listen(port, function () {
+  console.log('Servidor rodando na porta:', port);
+});

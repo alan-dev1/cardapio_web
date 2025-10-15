@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Cardápio Digital - Lanches </title>
-    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
     <!-- Navigation -->
@@ -45,7 +45,7 @@
                                     <h3 class="product-name"><%= lanche.nome %></h3>
                                     <p class="product-description"><%= lanche.descricao %></p>
                                     <div class="product-footer">
-                                        <span class="product-price">R$ <%= lanche.preco.toFixed(2).replace('.', ',') %></span>
+                                        <span class="product-price">R$ <%= Number(lanche.preco).toFixed(2).replace('.', ',') %></span>
                                         <button class="btn-add">Adicionar</button>
                                     </div>
                                 </div>
