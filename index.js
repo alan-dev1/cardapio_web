@@ -1,4 +1,4 @@
-const app = require('./config/serve');
+const app = require('./config/server');
 const routes = require('./app/routes/routes');
 
 // ==================== ROTAS DO CARDÁPIO ====================
@@ -10,3 +10,5 @@ routes.cardapioSave(app);
 routes.cardapioEditForm(app);
 routes.cardapioUpdate(app);
 routes.cardapioDelete(app);
+
+

@@ -9,7 +9,7 @@ const {
     showEditForm, 
     updateItemController,
     deleteItemController 
-} = require('../controllers/cardapio');
+} = require('../controllers/cardapiocontroller');
 
 // Schema de validação para itens do cardápio
 const cardapioSchema = Joi.object({
