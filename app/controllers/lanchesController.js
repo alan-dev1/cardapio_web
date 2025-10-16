@@ -1,4 +1,4 @@
-const dbConn = require('../config/dbConnection');
+const dbConn = require('../../config/dbConnection');
 const { getProdutosPorCategoria } = require('../models/homeModel');
 
 module.exports.lanches = (app, req, res) => {
