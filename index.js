@@ -1,7 +1,6 @@
 // index.js
 const express = require('express');
 const routes = require('./app/routes/routes'); // Importa as rotas
-
 const app = express();
 const port = 3000;
 
