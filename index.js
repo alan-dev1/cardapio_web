@@ -15,6 +15,8 @@ app.use(express.static('./public')); // Pasta de arquivos estáticos (CSS, image
 routes.home(app);
 routes.lanches(app);
 routes.bebidas(app);
+routes.localizacao(app);
+routes.paginaNaoEncontrada(app);
 
 
 // Inicialização do servidor

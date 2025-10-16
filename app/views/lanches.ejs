@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cardápio Digital - Bebidas</title>
+    <title> Cardápio Digital - Lanches </title>
     <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
@@ -15,18 +15,20 @@
             </div>
             <div class="nav-links">
                 <a href="/" class="nav-link">Página Principal</a>
-                <a href="/lanches" class="nav-link">Lanches</a>
-                <a href="/bebidas" class="nav-link active">Bebidas</a>
+                <a href="/lanches" class="nav-link active">Lanches</a>
+                <a href="/bebidas" class="nav-link">Bebidas</a>
+                <a href="/localizacao" class="nav-link">Localização</a>
             </div>
         </div>
     </nav>
 
+
     <main>
         <section class="page-header">
             <div class="container">
-                <h1 class="page-title">🥤 Nossas Bebidas</h1>
+                <h1 class="page-title">🍔 Nossos Lanches</h1>
                 <p class="page-description">
-                    Bebidas refrescantes e saborosas para complementar sua refeição perfeitamente
+                    Deliciosos hambúrgueres artesanais preparados com ingredientes frescos e de qualidade
                 </p>
             </div>
         </section>
@@ -35,24 +37,24 @@
             <div class="container">
                 <div class="products-grid products-grid-full">
 
-                    <% if (bebidas && bebidas.length > 0) { %>
-                        <% bebidas.forEach(bebida => { %>
+                    <% if (lanches && lanches.length > 0) { %>
+                        <% lanches.forEach(lanche => { %>
                             <div class="product-card">
                                 <div class="product-image">
-                                    <img src="<%= bebida.imagem %>" alt="<%= bebida.nome %>">
+                                    <img src="<%= lanche.imagem %>" alt="<%= lanche.nome %>">
                                 </div>
                                 <div class="product-content">
-                                    <h3 class="product-name"><%= bebida.nome %></h3>
-                                    <p class="product-description"><%= bebida.descricao %></p>
+                                    <h3 class="product-name"><%= lanche.nome %></h3>
+                                    <p class="product-description"><%= lanche.descricao %></p>
                                     <div class="product-footer">
-                                        <span class="product-price">R$ <%= Number(bebida.preco).toFixed(2).replace('.', ',') %></span>
+                                        <span class="product-price">R$ <%= Number(lanche.preco).toFixed(2).replace('.', ',') %></span>
                                         <button class="btn-add">Adicionar</button>
                                     </div>
                                 </div>
                             </div>
                         <% }) %>
                     <% } else { %>
-                        <p>Nenhuma bebida cadastrada ainda.</p>
+                        <p>Nenhum lanche cadastrado ainda.</p>
                     <% } %>
 
                 </div>
@@ -60,4 +62,4 @@
         </section>
     </main>
 </body>
-</html>
+
