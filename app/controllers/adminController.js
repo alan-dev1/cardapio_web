@@ -49,11 +49,9 @@ const produtoSchema = Joi.object({
     
     categoria: Joi.string()
         .trim()
-        .valid('eletrônicos', 'roupas', 'alimentos', 'livros', 'outros')
         .required()
         .messages({
             'string.empty': 'A categoria é obrigatória',
-            'any.only': 'Categoria inválida. Escolha: eletrônicos, roupas, alimentos, livros ou outros',
             'any.required': 'A categoria é obrigatória'
         })
 });
