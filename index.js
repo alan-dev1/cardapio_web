@@ -16,8 +16,8 @@ routes.home(app);
 routes.lanches(app);
 routes.bebidas(app);
 routes.localizacao(app);
+routes.admin(app); // Nova rota admin
 routes.paginaNaoEncontrada(app);
-
 
 // Inicialização do servidor
 app.listen(port, function () {
