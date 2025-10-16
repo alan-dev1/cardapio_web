@@ -1,17 +1,18 @@
-const mysql = require('mysql2'); // Importa o pacote mysql2 para conectar ao banco de dados MySQL
+// app/models/dbConnection.js
+const mysql = require('mysql2');
 
-// Configurações da conexão com o banco de dados
-const host = 'localhost'; // O endereço do servidor MySQL (localhost indica que o banco está na mesma máquina)
-const database = 'cardapio'; // Nome do banco de dados que será utilizado
-const user = 'root'; // Nome do usuário do banco de dados
-const password = '1234'; // Senha do usuário do banco de dados
+// Configurações de conexão com o banco de dados
+const host = 'localhost';
+const database = 'cardapio_restaurante'; // nome do seu banco
+const user = 'root'; // altere se necessário
+const password = 'coxinha.123'; // coloque sua senha do MySQL, se tiver
 
-// Exporta uma função que retorna uma nova conexão com o banco de dados
+// Exporta a função que cria a conexão
 module.exports = () => {
-    return dbConn = mysql.createConnection({
-        host: host,        // Passa o host para a configuração da conexão
-        user: user,        // Passa o usuário para a configuração da conexão
-        password: password, // Passa a senha para a configuração da conexão
-        database: database  // Passa o nome do banco de dados para a configuração da conexão
-    }); 
-}
+    return mysql.createConnection({
+        host: host,
+        user: user,
+        password: password,
+        database: database
+    });
+};

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cardápio Digital - Bebidas</title>
-    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
     <!-- Navigation -->
@@ -17,9 +17,11 @@
                 <a href="/" class="nav-link">Página Principal</a>
                 <a href="/lanches" class="nav-link">Lanches</a>
                 <a href="/bebidas" class="nav-link active">Bebidas</a>
+                <a href="/localizacao" class="nav-link">Localização</a>
             </div>
         </div>
     </nav>
+
 
     <main>
         <section class="page-header">
@@ -45,7 +47,7 @@
                                     <h3 class="product-name"><%= bebida.nome %></h3>
                                     <p class="product-description"><%= bebida.descricao %></p>
                                     <div class="product-footer">
-                                        <span class="product-price">R$ <%= bebida.preco.toFixed(2).replace('.', ',') %></span>
+                                        <span class="product-price">R$ <%= Number(bebida.preco).toFixed(2).replace('.', ',') %></span>
                                         <button class="btn-add">Adicionar</button>
                                     </div>
                                 </div>
