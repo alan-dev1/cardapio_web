@@ -18,6 +18,7 @@
                 <a href="/lanches" class="nav-link">Lanches</a>
                 <a href="/bebidas" class="nav-link active">Bebidas</a>
                 <a href="/localizacao" class="nav-link">Localização</a>
+                <a href="/admin" class="nav-link">Admin</a>
             </div>
         </div>
     </nav>
@@ -48,7 +49,6 @@
                                     <p class="product-description"><%= bebida.descricao %></p>
                                     <div class="product-footer">
                                         <span class="product-price">R$ <%= Number(bebida.preco).toFixed(2).replace('.', ',') %></span>
-                                        <button class="btn-add">Adicionar</button>
                                     </div>
                                 </div>
                             </div>
