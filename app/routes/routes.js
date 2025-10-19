@@ -3,8 +3,11 @@ const { home } = require('../controllers/homeController');
 const { bebidas } = require('../controllers/bebidasController');
 const { lanches } = require('../controllers/lanchesController');
 const { localizacao } = require('../controllers/localizacaoController');
-const { paginaNaoEncontrada } = require('../controllers/errorController');
 const { exibirFormulario, adicionarProduto } = require('../controllers/adminController');
+const { login } = require('../controllers/loginController');
+const { paginaNaoEncontrada } = require('../controllers/errorController');
+
+
 
 module.exports = {
     home: (app) => {
@@ -35,14 +38,21 @@ module.exports = {
         });
     },
 
-    admin: (app) => {
-        app.get('/admin', (req, res) => {
-            console.log('Cheguei na rota /admin');
+    login: (app) => {
+        app.get('/login', (req, res) => {
+            console.log('Cheguei na rota /login');
+            login(app, req, res);
+        });
+    },
+
+    adicionarProduto: (app) => {
+        app.get('/adicionarProduto', (req, res) => {
+            console.log('Cheguei na rota /adicionarProduto');
             exibirFormulario(app, req, res);
         });
 
-        app.post('/admin/adicionar', (req, res) => {
-            console.log('Cheguei na rota POST /admin/adicionar');
+        app.post('/adicionarProduto/adicionar', (req, res) => {
+            console.log('Cheguei na rota POST /adicionarProduto/adicionar');
             adicionarProduto(app, req, res);
         });
     },

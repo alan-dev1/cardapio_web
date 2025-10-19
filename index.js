@@ -30,7 +30,8 @@ routes.home(app);
 routes.lanches(app);
 routes.bebidas(app);
 routes.localizacao(app);
-routes.admin(app); 
+routes.adicionarProduto(app);
+routes.login(app); 
 routes.paginaNaoEncontrada(app);
 
 // Exporta o app, sem subir o servidor

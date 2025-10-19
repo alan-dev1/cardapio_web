@@ -59,7 +59,7 @@ const produtoSchema = Joi.object({
 
 module.exports.exibirFormulario = (app, req, res) => {
     console.log('[Controller Admin] Exibindo formulário');
-    res.render('admin.ejs');
+    res.render('admin/adicionarProduto.ejs');
 };
 
 module.exports.adicionarProduto = (app, req, res) => {
@@ -76,7 +76,7 @@ module.exports.adicionarProduto = (app, req, res) => {
         const erros = error.details.map(err => err.message);
         console.log('Erros de validação:', erros);
         
-        return res.status(400).render('admin.ejs', {
+        return res.status(400).render('admin/adicionarProduto.ejs', {
             erros: erros,
             produto: req.body // Mantém os dados preenchidos
         });
@@ -88,7 +88,7 @@ module.exports.adicionarProduto = (app, req, res) => {
         if(error){
             console.log('Erro ao adicionar produto:', error);
 
-            return res.status(500).render('admin.ejs', {
+            return res.status(500).render('admin/adicionarProduto.ejs', {
                 error: ['Erro ao adicionar produto ao bando de dados.'],
                 produto: req.body
             });
