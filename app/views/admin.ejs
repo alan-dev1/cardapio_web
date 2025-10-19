@@ -1,109 +1,70 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adicionar Produto - Cardápio Digital</title>
-    <link rel="stylesheet" href="/styles/admin.css">
-</head>
-<body>
-    <!-- Navigation -->
-    <nav class="navigation">
-        <div class="nav-container">
-            <div class="nav-brand">
-                <a href="/">🍔 Cardápio</a>
+<%- include('partials/_head', {
+  title: 'Admin | Cardápio Digital',
+  description: 'Painel administrativo',
+  area: 'admin',         // <<< chave para carregar admin-layout.css
+  adminPageCss: null,    // se quiser CSS por página do admin, coloque ex.: 'usuarios.css' em /styles/admin-pages
+  bodyClass: 'admin theme-admin' // mantém o tema roxinho via variáveis
+}) %>
+        
+    
+
+<%- include('partials/_navbar', { navActive: 'admin' }) %>
+
+<main>
+  <section class="page-header">
+    <div class="container">
+      <h1 class="page-title">➕ Adicionar Produto</h1>
+      <p class="page-description">
+        Preencha os dados abaixo para adicionar um novo item ao cardápio
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="form-container">
+        <form action="/admin/adicionar" method="POST" class="product-form">
+          <div class="form-group">
+            <label for="nome">Nome do Produto *</label>
+            <input type="text" id="nome" name="nome" placeholder="Ex: X-Bacon Especial" required>
+          </div>
+
+          <div class="form-group">
+            <label for="descricao">Descrição *</label>
+            <textarea id="descricao" name="descricao" rows="4"
+              placeholder="Descreva os ingredientes e características do produto..." required></textarea>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="preco">Preço (R$) *</label>
+              <input type="number" id="preco" name="preco" step="0.01" min="0" placeholder="25.90" required>
             </div>
-            <div class="nav-links">
-                <a href="/" class="nav-link">Página Principal</a>
-                <a href="/lanches" class="nav-link">Lanches</a>
-                <a href="/bebidas" class="nav-link">Bebidas</a>
-                <a href="/localizacao" class="nav-link">Localização</a>
-                <a href="/admin" class="nav-link active">Admin</a>
+
+            <div class="form-group">
+              <label for="categoria">Categoria *</label>
+              <select id="categoria" name="categoria" required>
+                <option value="">Selecione...</option>
+                <option value="Lanches">Lanches</option>
+                <option value="Bebidas">Bebidas</option>
+              </select>
             </div>
-        </div>
-    </nav>
+          </div>
 
-    <main>
-        <section class="page-header">
-            <div class="container">
-                <h1 class="page-title">➕ Adicionar Produto</h1>
-                <p class="page-description">
-                    Preencha os dados abaixo para adicionar um novo item ao cardápio
-                </p>
-            </div>
-        </section>
+          <div class="form-group">
+            <label for="imagem">URL da Imagem *</label>
+            <input type="url" id="imagem" name="imagem" placeholder="https://exemplo.com/imagem.jpg" required>
+            <small class="form-hint">Cole a URL completa de uma imagem da internet</small>
+          </div>
 
-        <section class="section">
-            <div class="container">
-                <div class="form-container">
-                    <form action="/admin/adicionar" method="POST" class="product-form">
-                        
-                        <div class="form-group">
-                            <label for="nome">Nome do Produto *</label>
-                            <input 
-                                type="text" 
-                                id="nome" 
-                                name="nome" 
-                                placeholder="Ex: X-Bacon Especial"
-                                required
-                            >
-                        </div>
+          <div class="form-actions">
+            <a href="/" class="btn btn-secondary">Cancelar</a>
+            <button type="submit" class="btn btn-primary">Adicionar Produto</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
 
-                        <div class="form-group">
-                            <label for="descricao">Descrição *</label>
-                            <textarea 
-                                id="descricao" 
-                                name="descricao" 
-                                rows="4"
-                                placeholder="Descreva os ingredientes e características do produto..."
-                                required
-                            ></textarea>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="preco">Preço (R$) *</label>
-                                <input 
-                                    type="number" 
-                                    id="preco" 
-                                    name="preco" 
-                                    step="0.01"
-                                    min="0"
-                                    placeholder="25.90"
-                                    required
-                                >
-                            </div>
-
-                            <div class="form-group">
-                                <label for="categoria">Categoria *</label>
-                                <select id="categoria" name="categoria" required>
-                                    <option value="">Selecione...</option>
-                                    <option value="Lanches">Lanches</option>
-                                    <option value="Bebidas">Bebidas</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="imagem">URL da Imagem *</label>
-                            <input 
-                                type="url" 
-                                id="imagem" 
-                                name="imagem" 
-                                placeholder="https://exemplo.com/imagem.jpg"
-                                required
-                            >
-                            <small class="form-hint">Cole a URL completa de uma imagem da internet</small>
-                        </div>
-
-                        <div class="form-actions">
-                            <a href="/" class="btn btn-secondary">Cancelar</a>
-                            <button type="submit" class="btn btn-primary">Adicionar Produto</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </section>
-    </main>
-</body>
-</html>
+<%- include('partials/_footer') %>

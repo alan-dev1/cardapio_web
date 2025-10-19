@@ -1,6 +1,7 @@
 // app/controllers/adminController.js
-const dbConn = require('../../config/dbConnection');
 const Joi = require('joi');
+const adminModel = require('../models/adminModel');
+const dbConn = require('../../config/dbConnection');
 
 // Schema de validação com Joi
 const produtoSchema = Joi.object({
@@ -82,25 +83,18 @@ module.exports.adicionarProduto = (app, req, res) => {
     }
 
     const db = dbConn();
-    
-    const sql = `
-        INSERT INTO produtos (nome, descricao, preco, imagem, categoria)
-        VALUES (?, ?, ?, ?, ?)
-    `;
-    
-    const { nome, descricao, preco, imagem, categoria } = value;
-    
-    db.query(sql, [nome, descricao, preco, imagem, categoria], (error, result) => {
-        if (error) {
+
+    adminModel.adicionarProduto(db, value, (error, result) =>{
+        if(error){
             console.log('Erro ao adicionar produto:', error);
-            
+
             return res.status(500).render('admin.ejs', {
-                erros: ['Erro ao adicionar produto no banco de dados.'],
+                error: ['Erro ao adicionar produto ao bando de dados.'],
                 produto: req.body
             });
         }
-        
-        console.log('Produto adicionado com sucesso! ID:', result.insertId);
-        res.redirect('/?sucesso=true');
+
+        console.log('Produto adicionado com sucesso! ID: ', result.insertId);
+        res.redirect('/');
     });
 };

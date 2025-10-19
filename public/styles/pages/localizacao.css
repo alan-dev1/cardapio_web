@@ -1,0 +1,44 @@
+/* ====== LOCALIZAÇÃO (ajustes específicos) ====== */
+
+/* grid de blocos informativos (📍 🕐 📱 💬) */
+.localizacao-grid {
+  display: grid;
+  grid-template-columns: 1fr;       /* mobile: 1 por linha */
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+@media (min-width: 768px) {
+  .localizacao-grid { grid-template-columns: repeat(2, 1fr); } /* 2x2 em telas médias+ */
+}
+
+/* bloco do mapa */
+.map-container {
+  margin-top: 3rem;
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.map-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.map-placeholder {
+  aspect-ratio: 16 / 9;
+  background-color: #f9f7f4;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6b7280;
+  font-size: 1.05rem;
+}
+.map-info {
+  text-align: center;
+  margin-top: 0.75rem;
+  color: #6b7280;
+  font-size: 0.9rem;
+}

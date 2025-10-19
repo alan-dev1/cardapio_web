@@ -2,7 +2,6 @@
 const express = require('express');
 const routes = require('./app/routes/routes'); // Importa as rotas
 const app = express();
-const port = 3000;
 
 // Configurações básicas
 app.set('view engine', 'ejs');
@@ -10,6 +9,21 @@ app.set('views', './app/views'); // Local das views
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('./public')); // Pasta de arquivos estáticos (CSS, imagens, etc.)
+
+app.use((req, res, next) => {
+  // mapeia o path para uma chave que bate com a navbar
+  const mapa = { 
+    '/': 'home', 
+    '/lanches': 'lanches', 
+    '/bebidas': 'bebidas', 
+    '/localizacao': 'localizacao', 
+    '/admin': 'admin' 
+  };
+  
+  res.locals.navActive = mapa[req.path] || '';
+  next();
+});
+
 
 // Chamada das rotas 
 routes.home(app);
@@ -19,7 +33,5 @@ routes.localizacao(app);
 routes.admin(app); 
 routes.paginaNaoEncontrada(app);
 
-// Inicialização do servidor
-app.listen(port, function () {
-  console.log('Servidor rodando na porta:', port);
-});
+// Exporta o app, sem subir o servidor
+module.exports = app;

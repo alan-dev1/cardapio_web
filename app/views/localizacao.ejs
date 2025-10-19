@@ -1,113 +1,98 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Localização | Cardápio Digital</title>
-  <meta name="description" content="Encontre nossa localização, horários de funcionamento e formas de contato.">
-  <link rel="stylesheet" href="/styles/localizacao.css">
-</head>
-<body>
-  <!-- Navigation -->
-  <nav class="navigation">
-    <div class="nav-container">
-      <div class="nav-brand">
-        <a href="/">🍔 Cardápio</a>
-      </div>
-      <div class="nav-links">
-        <a href="/" class="nav-link">Início</a>
-        <a href="/lanches" class="nav-link">Lanches</a>
-        <a href="/bebidas" class="nav-link">Bebidas</a>
-        <a href="/localizacao" class="nav-link active">Localização</a>
-        <a href="/admin" class="nav-link">Admin</a>
-      </div>
-    </div>
-  </nav>
+<%- include('partials/_head', {
+  title: 'Localização | Cardápio Digital',
+  description: 'Encontre nossa localização, horários de funcionamento e contato.',
+  area: 'public',
+  pageCss: 'localizacao.css'
+}) %>
 
-  <main>
-    <header class="page-header">
-      <div class="container">
-        <h1 class="page-title">Nossa Localização</h1>
-        <p class="page-description">
-          Visite-nos e conheça nosso espaço. Estamos esperando por você!
+
+
+<%- include('partials/_navbar', { navActive: 'localizacao' }) %>
+
+<main>
+  <header class="page-header">
+    <div class="container">
+      <h1 class="page-title">Nossa Localização</h1>
+      <p class="page-description">
+        Visite-nos e conheça nosso espaço. Estamos esperando por você!
+      </p>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <div class="products-grid localizacao-grid">
+        <!-- Endereço -->
+        <div class="product-card">
+          <div class="product-image icon-card">
+            <div class="icon-emoji">📍</div>
+          </div>
+          <div class="product-content">
+            <h3 class="product-name">Endereço</h3>
+            <p class="product-description">
+              Rua da Hambugueria, 123<br>
+              Centro - Campinas, SP<br>
+              CEP: 01234-567
+            </p>
+          </div>
+        </div>
+
+        <!-- Horário de Funcionamento -->
+        <div class="product-card">
+          <div class="product-image icon-card">
+            <div class="icon-emoji">🕐</div>
+          </div>
+          <div class="product-content">
+            <h3 class="product-name">Horário de Funcionamento</h3>
+            <p class="product-description">
+              Segunda a Sexta: 11h às 23h<br>
+              Sábados: 11h às 00h<br>
+              Domingos: 11h às 22h
+            </p>
+          </div>
+        </div>
+
+        <!-- Contato -->
+        <div class="product-card">
+          <div class="product-image icon-card">
+            <div class="icon-emoji">📱</div>
+          </div>
+          <div class="product-content">
+            <h3 class="product-name">Contato</h3>
+            <p class="product-description">
+              Telefone: (11) 98765-4321<br>
+              WhatsApp: (11) 98765-4321<br>
+              Email: contato@cardapio.com.br
+            </p>
+          </div>
+        </div>
+
+        <!-- Redes Sociais -->
+        <div class="product-card">
+          <div class="product-image icon-card">
+            <div class="icon-emoji">💬</div>
+          </div>
+          <div class="product-content">
+            <h3 class="product-name">Redes Sociais</h3>
+            <p class="product-description">
+              Instagram: @cardapiodigital<br>
+              Facebook: /cardapiodigital<br>
+              Twitter: @cardapiodigital
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mapa -->
+      <div class="map-container">
+        <h3 class="map-title">Como Chegar</h3>
+        <div class="map-placeholder">Mapa de Localização</div>
+        <p class="map-info">
+          Estacionamento disponível na rua.
         </p>
       </div>
-    </header>
+    </div>
+  </section>
+</main>
 
-    <section class="section">
-      <div class="container">
-        <div class="products-grid localizacao-grid">
-          <!-- Endereço -->
-          <div class="product-card">
-            <div class="product-image icon-card">
-              <div class="icon-emoji">📍</div>
-            </div>
-            <div class="product-content">
-              <h3 class="product-name">Endereço</h3>
-              <p class="product-description">
-                Rua da Hambugueria, 123<br>
-                Centro - Campinas, SP<br>
-                CEP: 01234-567
-              </p>
-            </div>
-          </div>
-
-          <!-- Horário de Funcionamento -->
-          <div class="product-card">
-            <div class="product-image icon-card">
-              <div class="icon-emoji">🕐</div>
-            </div>
-            <div class="product-content">
-              <h3 class="product-name">Horário de Funcionamento</h3>
-              <p class="product-description">
-                Segunda a Sexta: 11h às 23h<br>
-                Sábados: 11h às 00h<br>
-                Domingos: 11h às 22h
-              </p>
-            </div>
-          </div>
-
-          <!-- Contato -->
-          <div class="product-card">
-            <div class="product-image icon-card">
-              <div class="icon-emoji">📱</div>
-            </div>
-            <div class="product-content">
-              <h3 class="product-name">Contato</h3>
-              <p class="product-description">
-                Telefone: (11) 98765-4321<br>
-                WhatsApp: (11) 98765-4321<br>
-                Email: contato@cardapio.com.br
-              </p>
-            </div>
-          </div>
-
-          <!-- Redes Sociais -->
-          <div class="product-card">
-            <div class="product-image icon-card">
-              <div class="icon-emoji">💬</div>
-            </div>
-            <div class="product-content">
-              <h3 class="product-name">Redes Sociais</h3>
-              <p class="product-description">
-                Instagram: @cardapiodigital<br>
-                Facebook: /cardapiodigital<br>
-                Twitter: @cardapiodigital
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Mapa -->
-        <div class="map-container">
-          <h3 class="map-title">Como Chegar</h3>
-          <div class="map-placeholder">Mapa de Localização</div>
-          <p class="map-info">
-            Estacionamento disponível na rua.
-          </p>
-        </div>
-      </div>
-    </section>
-  </main>
-</body>
-</html>
+<%- include('partials/_footer') %>
