@@ -1,12 +1,9 @@
 <%- include('../partials/_head', {
   title: 'Admin | Cardápio Digital',
-  description: 'Painel administrativo',
+  description: 'Adicionar um novo produto',
   area: 'admin',         // <<< chave para carregar admin-layout.css
   adminPageCss: null,    // se quiser CSS por página do admin, coloque ex.: 'usuarios.css' em /styles/admin-pages
-  bodyClass: 'admin theme-admin' // mantém o tema roxinho via variáveis
-}) %>
-        
-    
+}) %>   
 
 <%- include('../partials/_navbar', { navActive: 'admin' }) %>
 
@@ -23,7 +20,7 @@
   <section class="section">
     <div class="container">
       <div class="form-container">
-        <form action="/admin/adicionar" method="POST" class="product-form">
+        <form action="/adicionarProduto/adicionar" method="POST" class="product-form">
           <div class="form-group">
             <label for="nome">Nome do Produto *</label>
             <input type="text" id="nome" name="nome" placeholder="Ex: X-Bacon Especial" required>

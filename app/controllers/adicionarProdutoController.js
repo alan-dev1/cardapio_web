@@ -1,6 +1,6 @@
 // app/controllers/adminController.js
 const Joi = require('joi');
-const adminModel = require('../models/adminModel');
+const adicionarProdutoModel = require('../models/adicionarProdutoModel');
 const dbConn = require('../../config/dbConnection');
 
 // Schema de validação com Joi
@@ -58,12 +58,12 @@ const produtoSchema = Joi.object({
 });
 
 module.exports.exibirFormulario = (app, req, res) => {
-    console.log('[Controller Admin] Exibindo formulário');
+    console.log('[Controller adicionarProduto] Exibindo formulário');
     res.render('admin/adicionarProduto.ejs');
 };
 
 module.exports.adicionarProduto = (app, req, res) => {
-    console.log('[Controller Admin] Adicionando produto');
+    console.log('[Controller adicionarProduto] Adicionando produto');
     
     // Validação com Joi
     const { error, value } = produtoSchema.validate(req.body, {
@@ -84,7 +84,7 @@ module.exports.adicionarProduto = (app, req, res) => {
 
     const db = dbConn();
 
-    adminModel.adicionarProduto(db, value, (error, result) =>{
+    adicionarProdutoModel.adicionarProduto(db, value, (error, result) =>{
         if(error){
             console.log('Erro ao adicionar produto:', error);
 

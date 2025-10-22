@@ -6,7 +6,7 @@ module.exports = {
         `;
         
         const { nome, descricao, preco, imagem, categoria } = produto;
-        console.log('[Admin Model] Adicionando produto no banco');
+        console.log('[adicionarProduto Model] Adicionando produto no banco');
 
         db.query(sql, [nome, descricao, preco, imagem, categoria], callback );
     }

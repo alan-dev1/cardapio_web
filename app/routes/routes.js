@@ -3,7 +3,7 @@ const { home } = require('../controllers/homeController');
 const { bebidas } = require('../controllers/bebidasController');
 const { lanches } = require('../controllers/lanchesController');
 const { localizacao } = require('../controllers/localizacaoController');
-const { exibirFormulario, adicionarProduto } = require('../controllers/adminController');
+const { exibirFormulario, adicionarProduto } = require('../controllers/adicionarProdutoController');
 const { login } = require('../controllers/loginController');
 const { paginaNaoEncontrada } = require('../controllers/errorController');
 

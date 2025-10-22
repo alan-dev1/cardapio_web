@@ -17,7 +17,7 @@ app.use((req, res, next) => {
     '/lanches': 'lanches', 
     '/bebidas': 'bebidas', 
     '/localizacao': 'localizacao', 
-    '/admin': 'admin' 
+    '/adicionarProduto': 'admin' 
   };
   
   res.locals.navActive = mapa[req.path] || '';
