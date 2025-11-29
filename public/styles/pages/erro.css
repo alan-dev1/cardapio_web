@@ -1,0 +1,39 @@
+/* ====== 404 / ERRO ====== */
+
+.error-container {
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4rem 1rem;
+}
+
+.error-code {
+  font-size: 6rem;
+  font-weight: 800;
+  color: #d97706;
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+
+.error-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 0.75rem;
+}
+
+.error-message {
+  font-size: 1.125rem;
+  color: #6b7280;
+  max-width: 32rem;
+  margin: 0 auto 2rem;
+}
+
+@media (max-width: 768px) {
+  .error-code { font-size: 4rem; }
+  .error-title { font-size: 1.5rem; }
+  .error-message { font-size: 1rem; }
+}

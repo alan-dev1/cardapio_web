@@ -1,6 +1,7 @@
 // app/controllers/adminController.js
-const dbConn = require('../../config/dbConnection');
 const Joi = require('joi');
+const adicionarProdutoModel = require('../models/adicionarProdutoModel');
+const dbConn = require('../../config/dbConnection');
 
 // Schema de validação com Joi
 const produtoSchema = Joi.object({
@@ -57,12 +58,12 @@ const produtoSchema = Joi.object({
 });
 
 module.exports.exibirFormulario = (app, req, res) => {
-    console.log('[Controller Admin] Exibindo formulário');
-    res.render('admin.ejs');
+    console.log('[Controller adicionarProduto] Exibindo formulário');
+    res.render('admin/adicionarProduto.ejs');
 };
 
 module.exports.adicionarProduto = (app, req, res) => {
-    console.log('[Controller Admin] Adicionando produto');
+    console.log('[Controller adicionarProduto] Adicionando produto');
     
     // Validação com Joi
     const { error, value } = produtoSchema.validate(req.body, {
@@ -75,32 +76,25 @@ module.exports.adicionarProduto = (app, req, res) => {
         const erros = error.details.map(err => err.message);
         console.log('Erros de validação:', erros);
         
-        return res.status(400).render('admin.ejs', {
+        return res.status(400).render('admin/adicionarProduto.ejs', {
             erros: erros,
             produto: req.body // Mantém os dados preenchidos
         });
     }
 
     const db = dbConn();
-    
-    const sql = `
-        INSERT INTO produtos (nome, descricao, preco, imagem, categoria)
-        VALUES (?, ?, ?, ?, ?)
-    `;
-    
-    const { nome, descricao, preco, imagem, categoria } = value;
-    
-    db.query(sql, [nome, descricao, preco, imagem, categoria], (error, result) => {
-        if (error) {
+
+    adicionarProdutoModel.adicionarProduto(db, value, (error, result) =>{
+        if(error){
             console.log('Erro ao adicionar produto:', error);
-            
-            return res.status(500).render('admin.ejs', {
-                erros: ['Erro ao adicionar produto no banco de dados.'],
+
+            return res.status(500).render('admin/adicionarProduto.ejs', {
+                error: ['Erro ao adicionar produto ao bando de dados.'],
                 produto: req.body
             });
         }
-        
-        console.log('Produto adicionado com sucesso! ID:', result.insertId);
-        res.redirect('/?sucesso=true');
+
+        console.log('Produto adicionado com sucesso! ID: ', result.insertId);
+        res.redirect('/admin/gerenciar');
     });
 };

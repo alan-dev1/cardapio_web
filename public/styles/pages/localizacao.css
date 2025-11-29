@@ -1,0 +1,170 @@
+/* ====== TEMA DA PÁGINA ====== */
+/* Troque as variáveis abaixo para mudar cores e fonte dessa view */
+:root {
+  --loc-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --loc-text: #1a1a1a;
+  --loc-muted: #6b7280;
+
+  /* tema quente (padrão do site) */
+  --loc-brand: #d97706;
+  --loc-brand-ink: #451a03;
+
+  /* superfícies */
+  --loc-bg: #fefbf7;
+  --loc-card: #ffffff;
+  --loc-card-border: #eee2cf;
+
+  /* sombras */
+  --loc-shadow-1: 0 1px 3px rgba(0,0,0,.08);
+  --loc-shadow-2: 0 10px 20px rgba(0,0,0,.12);
+}
+
+body {
+  font-family: var(--loc-font);
+  color: var(--loc-text);
+  background: var(--loc-bg);
+}
+
+/* ====== HEADER ====== */
+.page-header {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #fff;
+  padding: 3rem 1.5rem;
+  text-align: center;
+  border-bottom: 1px solid rgba(0,0,0,.05);
+}
+
+.page-title {
+  font-weight: 800;
+  letter-spacing: .2px;
+}
+
+.page-description {
+  opacity: .95;
+}
+
+/* ====== GRID ====== */
+.section { padding: 3rem 1.5rem; }
+
+.localizacao-grid {
+  display: grid;
+  grid-template-columns: 1fr;           /* mobile */
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+@media (min-width: 768px) {
+  .localizacao-grid { grid-template-columns: repeat(2, 1fr); } /* 2x2 */
+}
+
+/* ====== ICON CARDS (sem área de imagem gigante!) ====== */
+/* Usa sua marcação existente:
+   <div class="product-card">
+     <div class="product-image icon-card">
+       <div class="icon-emoji">📍</div>
+     </div>
+     <div class="product-content">...</div>
+   </div>
+*/
+.localizacao-grid .product-card {
+  display: flex;                         /* ícone à esquerda, texto à direita */
+  align-items: center;
+  gap: 1rem;
+  background: var(--loc-card);
+  border: 1px solid var(--loc-card-border);
+  border-radius: 12px;
+  box-shadow: var(--loc-shadow-1);
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  overflow: hidden;
+  padding: 1rem;
+  min-height: 120px;
+}
+
+.localizacao-grid .product-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--loc-shadow-2);
+  border-color: #e8d5b7;
+}
+
+/* substitui o bloco de “imagem” por um círculo de ícone */
+.localizacao-grid .product-card .icon-card {
+  width: 64px;
+  height: 64px;
+  min-width: 64px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: rgba(217, 119, 6, 0.1);
+  border: 1px solid rgba(217, 119, 6, 0.25);
+  /* remove qualquer herança do layout global de imagem */
+  aspect-ratio: auto;
+  padding: 0;
+}
+
+.localizacao-grid .product-card .icon-emoji {
+  font-size: 28px;
+  line-height: 1;
+}
+
+/* conteúdo textual ao lado do ícone */
+.localizacao-grid .product-card .product-content {
+  padding: 0;
+}
+
+.localizacao-grid .product-card .product-name {
+  margin: 0 0 .25rem 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--loc-text);
+}
+
+.localizacao-grid .product-card .product-description {
+  color: var(--loc-muted);
+  font-size: .9rem;
+  line-height: 1.55;
+}
+
+/* ====== MAPA ====== */
+.map-container {
+  margin-top: 2rem;
+  background: var(--loc-card);
+  border: 1px solid var(--loc-card-border);
+  border-radius: 12px;
+  padding: 1.25rem;
+  box-shadow: var(--loc-shadow-1);
+}
+
+.map-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  text-align: center;
+  color: var(--loc-text);
+  margin-bottom: .75rem;
+}
+
+.map-placeholder {
+  aspect-ratio: 16 / 9;
+  border-radius: 10px;
+  background: #faf5ee;
+  border: 1px dashed #e8d5b7;
+  color: var(--loc-muted);
+  display: grid;
+  place-items: center;
+  font-size: 1rem;
+}
+
+.map-info {
+  text-align: center;
+  margin-top: .75rem;
+  color: var(--loc-muted);
+  font-size: .9rem;
+}
+
+/* ====== PEQUENAS TELAS ====== */
+@media (max-width: 420px) {
+  .localizacao-grid .product-card { padding: .875rem; gap: .75rem; }
+  .localizacao-grid .product-card .icon-card {
+    width: 56px; height: 56px; min-width: 56px;
+  }
+  .localizacao-grid .product-card .product-name { font-size: 1rem; }
+  .localizacao-grid .product-card .product-description { font-size: .875rem; }
+}

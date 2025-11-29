@@ -1,0 +1,155 @@
+<%- include('../partials/_head', {
+  title: 'Editar Produto | Admin',
+  description: 'Editar informações do produto',
+  area: 'admin'
+}) %>
+
+<%- include('../partials/_navbar', { navActive: 'admin' }) %>
+
+<main>
+  <section class="page-header">
+    <div class="container">
+      <h1 class="page-title">✏️ Editar Produto</h1>
+      <p class="page-description">
+        Atualize as informações do produto
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <% if (typeof erros !== 'undefined' && erros && erros.length > 0) { %>
+        <div class="alert alert-error">
+          <h3>❌ Erros encontrados:</h3>
+          <ul>
+            <% erros.forEach(erro => { %>
+              <li><%= erro %></li>
+            <% }) %>
+          </ul>
+        </div>
+      <% } %>
+
+      <div class="form-container">
+        <form action="/admin/editar/<%= produto.id %>" method="POST" class="product-form">
+          <div class="form-group">
+            <label for="nome">Nome do Produto *</label>
+            <input type="text" 
+                   id="nome" 
+                   name="nome" 
+                   value="<%= produto.nome %>" 
+                   placeholder="Ex: X-Bacon Especial" 
+                   required>
+          </div>
+
+          <div class="form-group">
+            <label for="descricao">Descrição *</label>
+            <textarea id="descricao" 
+                      name="descricao" 
+                      rows="4"
+                      placeholder="Descreva os ingredientes e características do produto..." 
+                      required><%= produto.descricao %></textarea>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="preco">Preço (R$) *</label>
+              <input type="number" 
+                     id="preco" 
+                     name="preco" 
+                     step="0.01" 
+                     min="0" 
+                     value="<%= produto.preco %>" 
+                     placeholder="25.90" 
+                     required>
+            </div>
+
+            <div class="form-group">
+              <label for="categoria">Categoria *</label>
+              <select id="categoria" name="categoria" required>
+                <option value="">Selecione...</option>
+                <option value="Lanches" <%= produto.categoria === 'Lanches' ? 'selected' : '' %>>Lanches</option>
+                <option value="Bebidas" <%= produto.categoria === 'Bebidas' ? 'selected' : '' %>>Bebidas</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="imagem">URL da Imagem *</label>
+            <input type="url" 
+                   id="imagem" 
+                   name="imagem" 
+                   value="<%= produto.imagem %>" 
+                   placeholder="https://exemplo.com/imagem.jpg" 
+                   required>
+            <small class="form-hint">Cole a URL completa de uma imagem da internet</small>
+          </div>
+
+          <div class="preview-container" id="previewContainer">
+            <img src="<%= produto.imagem %>" alt="Preview" id="imagePreview">
+          </div>
+
+          <div class="form-actions">
+            <a href="/admin/gerenciar" class="btn btn-secondary">Cancelar</a>
+            <button type="submit" class="btn btn-primary">💾 Salvar Alterações</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+// Preview da imagem
+const imagemInput = document.getElementById('imagem');
+const imagePreview = document.getElementById('imagePreview');
+
+imagemInput.addEventListener('input', (e) => {
+  const url = e.target.value;
+  if (url) {
+    imagePreview.src = url;
+  }
+});
+</script>
+
+<style>
+.alert {
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+}
+
+.alert-error {
+  background: #fee2e2;
+  border: 2px solid #ef4444;
+  color: #991b1b;
+}
+
+.alert h3 {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+.alert ul {
+  list-style: none;
+  padding: 0;
+}
+
+.alert li {
+  padding: 0.25rem 0;
+}
+
+.preview-container {
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.preview-container img {
+  max-width: 300px;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+</style>
+
+<%- include('../partials/_footer') %>

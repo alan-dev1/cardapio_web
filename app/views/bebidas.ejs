@@ -1,65 +1,47 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cardápio Digital - Bebidas</title>
-    <link rel="stylesheet" href="styles/style.css">
-</head>
-<body>
-    <!-- Navigation -->
-    <nav class="navigation">
-        <div class="nav-container">
-            <div class="nav-brand">
-                <a href="/">🍔 Cardápio</a>
-            </div>
-            <div class="nav-links">
-                <a href="/" class="nav-link">Página Principal</a>
-                <a href="/lanches" class="nav-link">Lanches</a>
-                <a href="/bebidas" class="nav-link active">Bebidas</a>
-                <a href="/localizacao" class="nav-link">Localização</a>
-                <a href="/admin" class="nav-link">Admin</a>
-            </div>
-        </div>
-    </nav>
+<%- include('partials/_head', {
+  title: 'Cardápio Digital - Bebidas',
+  description: 'Bebidas refrescantes e saborosas.',
+  area: 'public'
+}) %>
 
 
-    <main>
-        <section class="page-header">
-            <div class="container">
-                <h1 class="page-title">🥤 Nossas Bebidas</h1>
-                <p class="page-description">
-                    Bebidas refrescantes e saborosas para complementar sua refeição perfeitamente
-                </p>
-            </div>
-        </section>
 
-        <section class="section">
-            <div class="container">
-                <div class="products-grid products-grid-full">
+<%- include('partials/_navbar', { navActive: 'bebidas' }) %>
 
-                    <% if (bebidas && bebidas.length > 0) { %>
-                        <% bebidas.forEach(bebida => { %>
-                            <div class="product-card">
-                                <div class="product-image">
-                                    <img src="<%= bebida.imagem %>" alt="<%= bebida.nome %>">
-                                </div>
-                                <div class="product-content">
-                                    <h3 class="product-name"><%= bebida.nome %></h3>
-                                    <p class="product-description"><%= bebida.descricao %></p>
-                                    <div class="product-footer">
-                                        <span class="product-price">R$ <%= Number(bebida.preco).toFixed(2).replace('.', ',') %></span>
-                                    </div>
-                                </div>
-                            </div>
-                        <% }) %>
-                    <% } else { %>
-                        <p>Nenhuma bebida cadastrada ainda.</p>
-                    <% } %>
+<main>
+  <section class="page-header">
+    <div class="container">
+      <h1 class="page-title">🥤 Nossas Bebidas</h1>
+      <p class="page-description">
+        Bebidas refrescantes e saborosas para complementar sua refeição perfeitamente
+      </p>
+    </div>
+  </section>
 
+  <section class="section">
+    <div class="container">
+      <div class="products-grid products-grid-full">
+        <% if (bebidas && bebidas.length > 0) { %>
+          <% bebidas.forEach(bebida => { %>
+            <div class="product-card">
+              <div class="product-image">
+                <img src="<%= bebida.imagem %>" alt="<%= bebida.nome %>">
+              </div>
+              <div class="product-content">
+                <h3 class="product-name"><%= bebida.nome %></h3>
+                <p class="product-description"><%= bebida.descricao %></p>
+                <div class="product-footer">
+                  <span class="product-price">R$ <%= Number(bebida.preco).toFixed(2).replace('.', ',') %></span>
                 </div>
+              </div>
             </div>
-        </section>
-    </main>
-</body>
-</html>
+          <% }) %>
+        <% } else { %>
+          <p>Nenhuma bebida cadastrada ainda.</p>
+        <% } %>
+      </div>
+    </div>
+  </section>
+</main>
+
+<%- include('partials/_footer') %>

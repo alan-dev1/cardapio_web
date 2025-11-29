@@ -1,0 +1,212 @@
+<%- include('../partials/_head', {
+  title: 'Adicionar Produto | Admin',
+  description: 'Adicionar um novo produto ao cardápio',
+  area: 'admin',
+  adminPageCss: null
+}) %>   
+
+<%- include('../partials/_navbar', { navActive: 'admin' }) %>
+
+<main>
+  <section class="page-header">
+    <div class="container">
+      <h1 class="page-title">➕ Adicionar Produto</h1>
+      <p class="page-description">
+        Preencha os dados abaixo para adicionar um novo item ao cardápio
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      
+      <!-- Mensagens de erro -->
+      <% if (typeof erros !== 'undefined' && erros && erros.length > 0) { %>
+        <div class="alert alert-error">
+          <h3>⚠️ Erros encontrados:</h3>
+          <ul>
+            <% erros.forEach(erro => { %>
+              <li><%= erro %></li>
+            <% }) %>
+          </ul>
+        </div>
+      <% } %>
+
+      <div class="form-container">
+        
+        <!-- FORMULÁRIO DE ADIÇÃO -->
+        <form action="/admin/adicionar" method="POST" class="product-form">
+          
+          <div class="form-group">
+            <label for="nome">Nome do Produto *</label>
+            <input 
+              type="text" 
+              id="nome" 
+              name="nome" 
+              placeholder="Ex: X-Bacon Especial"
+              value="<%= typeof produto !== 'undefined' && produto.nome ? produto.nome : '' %>"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="descricao">Descrição *</label>
+            <textarea 
+              id="descricao" 
+              name="descricao" 
+              rows="4"
+              placeholder="Descreva os ingredientes e características do produto..." 
+              required
+            ><%= typeof produto !== 'undefined' && produto.descricao ? produto.descricao : '' %></textarea>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="preco">Preço (R$) *</label>
+              <input 
+                type="number" 
+                id="preco" 
+                name="preco" 
+                step="0.01" 
+                min="0.01" 
+                placeholder="25.90"
+                value="<%= typeof produto !== 'undefined' && produto.preco ? produto.preco : '' %>"
+                required
+              >
+            </div>
+
+            <div class="form-group">
+              <label for="categoria">Categoria *</label>
+              <select id="categoria" name="categoria" required>
+                <option value="">Selecione...</option>
+                <option value="Lanches" 
+                  <%= typeof produto !== 'undefined' && produto.categoria === 'Lanches' ? 'selected' : '' %>>
+                  Lanches
+                </option>
+                <option value="Bebidas" 
+                  <%= typeof produto !== 'undefined' && produto.categoria === 'Bebidas' ? 'selected' : '' %>>
+                  Bebidas
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="imagem">URL da Imagem *</label>
+            <input 
+              type="url" 
+              id="imagem" 
+              name="imagem" 
+              placeholder="https://exemplo.com/imagem.jpg"
+              value="<%= typeof produto !== 'undefined' && produto.imagem ? produto.imagem : '' %>"
+              required
+            >
+            <small class="form-hint">Cole a URL completa de uma imagem da internet</small>
+          </div>
+
+          <!-- Preview da imagem -->
+          <div class="preview-container" id="previewContainer" style="display: none;">
+            <p><strong>Preview da imagem:</strong></p>
+            <img src="" alt="Preview" id="imagePreview">
+          </div>
+
+          <div class="form-actions">
+            <a href="/admin/gerenciar" class="btn btn-secondary">❌ Cancelar</a>
+            <button type="submit" class="btn btn-primary">✅ Adicionar Produto</button>
+          </div>
+          
+        </form>
+        
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Script de preview -->
+<script>
+const imagemInput = document.getElementById('imagem');
+const imagePreview = document.getElementById('imagePreview');
+const previewContainer = document.getElementById('previewContainer');
+
+imagemInput.addEventListener('input', (e) => {
+  const url = e.target.value.trim();
+  
+  if (url && url.startsWith('http')) {
+    imagePreview.src = url;
+    previewContainer.style.display = 'block';
+    
+    imagePreview.onerror = () => {
+      previewContainer.style.display = 'none';
+    };
+  } else {
+    previewContainer.style.display = 'none';
+  }
+});
+
+// Log para debug
+console.log('📝 Formulário de adicionar produto carregado');
+console.log('Action do form:', document.querySelector('form').action);
+</script>
+
+<style>
+.alert {
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  background: #fee2e2;
+  border: 2px solid #ef4444;
+}
+
+.alert-error {
+  color: #991b1b;
+}
+
+.alert h3 {
+  margin: 0 0 0.75rem 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.alert ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.alert li {
+  padding: 0.35rem 0;
+  font-size: 0.95rem;
+}
+
+.alert li:before {
+  content: '• ';
+  color: #ef4444;
+  font-weight: bold;
+  margin-right: 0.5rem;
+}
+
+.preview-container {
+  text-align: center;
+  margin: 1.5rem 0;
+  padding: 1.5rem;
+  background: #f8f9fa;
+  border-radius: 12px;
+  border: 2px dashed #dee2e6;
+}
+
+.preview-container p {
+  margin: 0 0 1rem 0;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.preview-container img {
+  max-width: 100%;
+  max-height: 300px;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+</style>
+
+<%- include('../partials/_footer') %>

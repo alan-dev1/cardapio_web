@@ -1,37 +1,25 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>404 - Página não encontrada | Cardápio Digital</title>
-  <meta name="description" content="Página não encontrada. Retorne para o cardápio principal.">
-  <link rel="stylesheet" href="/styles/404.css">
-</head>
-<body>
-  <nav class="navigation">
-    <div class="nav-container">
-      <div class="nav-brand">
-        <a href="/">🍔 Cardápio</a>
-      </div>
-      <div class="nav-links">
-        <a href="/" class="nav-link">Início</a>
-        <a href="/lanches" class="nav-link">Lanches</a>
-        <a href="/bebidas" class="nav-link">Bebidas</a>
-        <a href="/localizacao" class="nav-link">Localização</a>
-        <a href="/admin" class="nav-link">Admin</a>
-      </div>
-    </div>
-  </nav>
+<%- include('partials/_head', {
+  title: '404 - Página não encontrada | Cardápio Digital',
+  description: 'Página não encontrada. Retorne para o cardápio principal.',
+  area: 'public',
+  pageCss: 'erro.css'
+}) %>
 
-  <main>
-    <div class="container error-container">
-      <h1 class="error-code">404</h1>
-      <h2 class="error-title">Página não encontrada</h2>
-      <p class="error-message">
-        Desculpe, a página que você está procurando não existe ou foi removida.
-      </p>
-      <a href="/" class="btn btn-primary">Voltar para o início</a>
-    </div>
-  </main>
-</body>
-</html>
+
+
+
+
+<%- include('partials/_navbar', { navActive: '' }) %>
+
+<main>
+  <div class="container error-container">
+    <h1 class="error-code">404</h1>
+    <h2 class="error-title">Página não encontrada</h2>
+    <p class="error-message">
+      Desculpe, a página que você está procurando não existe ou foi removida.
+    </p>
+    <a href="/" class="btn btn-primary">Voltar para o início</a>
+  </div>
+</main>
+
+<%- include('partials/_footer') %>

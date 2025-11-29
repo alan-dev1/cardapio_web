@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title><%= (typeof title !== 'undefined' && title) ? title : 'Cardápio Digital' %></title>
+  <meta name="description" content="<%= (typeof description !== 'undefined' && description) ? description : 'Cardápio Digital' %>">
+
+  <% const _area = (typeof area !== 'undefined' && area) ? area : 'public'; %>
+
+  <% if (_area === 'admin') { %>
+    <!-- Admin: base + admin-layout -->
+    <link rel="stylesheet" href="/styles/base.css">
+    <link rel="stylesheet" href="/styles/admin-pages/admin-layout.css">
+    <% if (typeof adminPageCss !== 'undefined' && adminPageCss) { %>
+      <link rel="stylesheet" href="/styles/admin-pages/<%= adminPageCss %>">
+    <% } %>
+  <% } else { %>
+    <!-- Público: base + layout (+ opcional por página) -->
+    <link rel="stylesheet" href="/styles/base.css">
+    <link rel="stylesheet" href="/styles/layout.css">
+    <% if (typeof pageCss !== 'undefined' && pageCss) { %>
+      <link rel="stylesheet" href="/styles/pages/<%= pageCss %>">
+    <% } %>
+  <% } %>
+</head>
+<body class="<%= (typeof bodyClass !== 'undefined' && bodyClass) ? bodyClass : '' %>">
