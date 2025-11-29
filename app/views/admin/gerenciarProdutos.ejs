@@ -1,0 +1,212 @@
+<%- include('../partials/_head', {
+  title: 'Gerenciar Produtos | Admin',
+  description: 'Gerencie todos os produtos do cardápio',
+  area: 'admin'
+}) %>
+
+<%- include('../partials/_navbar', { navActive: 'admin' }) %>
+
+<main>
+  <section class="page-header">
+    <div class="container">
+      <h1 class="page-title">📦 Gerenciar Produtos</h1>
+      <p class="page-description">
+        Visualize, edite ou remova produtos do cardápio
+      </p>
+      <a href="/admin/adicionar" class="btn btn-primary" style="margin-top: 1rem;">➕ Adicionar Novo Produto</a>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <% if (produtos && produtos.length > 0) { %>
+        <div class="admin-table-container">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Imagem</th>
+                <th>Nome</th>
+                <th>Categoria</th>
+                <th>Preço</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% produtos.forEach(produto => { %>
+                <tr data-produto-id="<%= produto.id %>">
+                  <td>
+                    <img src="<%= produto.imagem %>" alt="<%= produto.nome %>" class="produto-thumb">
+                  </td>
+                  <td>
+                    <strong><%= produto.nome %></strong>
+                    <br>
+                    <small class="produto-desc"><%= produto.descricao.substring(0, 50) %>...</small>
+                  </td>
+                  <td>
+                    <span class="badge badge-<%= produto.categoria === 'Lanches' ? 'orange' : 'blue' %>">
+                      <%= produto.categoria %>
+                    </span>
+                  </td>
+                  <td><strong>R$ <%= Number(produto.preco).toFixed(2).replace('.', ',') %></strong></td>
+                  <td class="acoes">
+                    <a href="/admin/editar/<%= produto.id %>" class="btn-action btn-edit" title="Editar">✏️</a>
+                    <button onclick="deletarProduto(<%= produto.id %>, '<%= produto.nome %>')" 
+                            class="btn-action btn-delete" 
+                            title="Deletar">🗑️</button>
+                  </td>
+                </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      <% } else { %>
+        <div class="empty-state">
+          <p>📭 Nenhum produto cadastrado ainda.</p>
+          <a href="/admin/adicionar" class="btn btn-primary">Adicionar Primeiro Produto</a>
+        </div>
+      <% } %>
+    </div>
+  </section>
+</main>
+
+<script>
+async function deletarProduto(id, nome) {
+  if (!confirm(`Tem certeza que deseja deletar "${nome}"?`)) {
+    return;
+  }
+
+  try {
+    const response = await fetch(`/admin/deletar/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
+    const data = await response.json();
+
+    if (data.sucesso) {
+      // Remove a linha da tabela
+      const linha = document.querySelector(`tr[data-produto-id="${id}"]`);
+      linha.style.opacity = '0';
+      setTimeout(() => linha.remove(), 300);
+      
+      alert('Produto deletado com sucesso!');
+    } else {
+      alert('Erro ao deletar produto: ' + data.mensagem);
+    }
+  } catch (error) {
+    console.error('Erro:', error);
+    alert('Erro ao deletar produto. Tente novamente.');
+  }
+}
+</script>
+
+<style>
+.admin-table-container {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-table thead {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.admin-table th {
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+}
+
+.admin-table td {
+  padding: 1rem;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.admin-table tbody tr {
+  transition: background 0.2s;
+}
+
+.admin-table tbody tr:hover {
+  background: #f9f9f9;
+}
+
+.produto-thumb {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.produto-desc {
+  color: #666;
+  font-size: 0.85rem;
+}
+
+.badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.badge-orange {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.badge-blue {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.acoes {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn-action {
+  padding: 0.5rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 1.25rem;
+  transition: transform 0.2s;
+  text-decoration: none;
+}
+
+.btn-action:hover {
+  transform: scale(1.2);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 3rem;
+  color: #666;
+}
+
+.empty-state p {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+  .admin-table-container {
+    overflow-x: auto;
+  }
+  
+  .admin-table {
+    min-width: 600px;
+  }
+}
+</style>
+
+<%- include('../partials/_footer') %>

@@ -8,7 +8,52 @@
       <a href="/lanches" class="nav-link <%= navActive === 'lanches' ? 'active' : '' %>">Lanches</a>
       <a href="/bebidas" class="nav-link <%= navActive === 'bebidas' ? 'active' : '' %>">Bebidas</a>
       <a href="/localizacao" class="nav-link <%= navActive === 'localizacao' ? 'active' : '' %>">Localização</a>
-      <a href="/login" class="nav-link <%= navActive === 'admin' ? 'active' : '' %>">🔐 Entrar</a>
+      
+      <% if (usuario) { %>
+        <!-- Usuário logado -->
+        <% if (usuario.tipo === 'admin') { %>
+          <a href="/admin/gerenciar" class="nav-link <%= navActive === 'admin' ? 'active' : '' %>">⚙️ Admin</a>
+        <% } %>
+        <div class="user-menu">
+          <span class="user-name">👤 <%= usuario.nome.split(' ')[0] %></span>
+          <a href="/logout" class="nav-link nav-link-logout">🚪 Sair</a>
+        </div>
+      <% } else { %>
+        <!-- Usuário não logado -->
+        <a href="/registro" class="nav-link">📝 Criar Conta</a>
+        <a href="/login" class="nav-link">🔐 Entrar</a>
+      <% } %>
     </div>
   </div>
 </nav>
+
+<style>
+.user-menu {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.user-name {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--brand, #d97706);
+}
+
+.nav-link-logout {
+  background: #fee2e2;
+  color: #991b1b !important;
+}
+
+.nav-link-logout:hover {
+  background: #fecaca !important;
+}
+
+@media (max-width: 768px) {
+  .user-menu {
+    width: 100%;
+    justify-content: center;
+  }
+}
+</style>
