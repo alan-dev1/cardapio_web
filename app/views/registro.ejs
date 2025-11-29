@@ -1,0 +1,139 @@
+<%- include('partials/_head', {
+  title: '📝 Criar Conta - Cardápio Digital',
+  description: 'Crie sua conta para acessar o cardápio',
+  area: 'admin',
+  adminPageCss: 'login.css'
+}) %>
+
+<!-- Background Shapes -->
+<div class="bg-shape bg-shape-1"></div>
+<div class="bg-shape bg-shape-2"></div>
+<div class="bg-shape bg-shape-3"></div>
+
+<!-- Registro Container -->
+<div class="login-container">
+  <div class="login-card">
+    <div class="login-header">
+      <div class="login-icon">👤</div>
+      <h1 class="login-title">Criar Conta</h1>
+      <p class="login-subtitle">Preencha os dados para criar sua conta</p>
+    </div>
+
+    <% if (typeof erros !== 'undefined' && erros && erros.length > 0) { %>
+      <div class="alert alert-error">
+        <% erros.forEach(erro => { %>
+          <p>❌ <%= erro %></p>
+        <% }) %>
+      </div>
+    <% } %>
+
+    <form class="login-form" method="POST" action="/registro">
+      <div class="form-group">
+        <label for="nome" class="form-label">Nome Completo</label>
+        <input
+          type="text"
+          id="nome"
+          name="nome"
+          class="form-input"
+          placeholder="João Silva"
+          value="<%= typeof dados !== 'undefined' && dados.nome ? dados.nome : '' %>"
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="email" class="form-label">Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          class="form-input"
+          placeholder="joao@exemplo.com"
+          value="<%= typeof dados !== 'undefined' && dados.email ? dados.email : '' %>"
+          required
+          autocomplete="email"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="senha" class="form-label">Senha</label>
+        <div class="password-wrapper">
+          <input
+            type="password"
+            id="senha"
+            name="senha"
+            class="form-input"
+            placeholder="••••••••"
+            required
+            autocomplete="new-password"
+            minlength="6"
+          >
+          <span class="password-toggle" aria-hidden="true" title="Senha">🔒</span>
+        </div>
+        <small class="form-hint">Mínimo de 6 caracteres</small>
+      </div>
+
+      <div class="form-group">
+        <label for="confirmarSenha" class="form-label">Confirmar Senha</label>
+        <div class="password-wrapper">
+          <input
+            type="password"
+            id="confirmarSenha"
+            name="confirmarSenha"
+            class="form-input"
+            placeholder="••••••••"
+            required
+            autocomplete="new-password"
+            minlength="6"
+          >
+          <span class="password-toggle" aria-hidden="true" title="Confirmar">🔒</span>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-login">Criar Conta</button>
+    </form>
+
+    <div class="back-link">
+      <a href="/login">
+        <span>←</span>
+        <span>Já tem conta? Faça login</span>
+      </a>
+    </div>
+
+    <div class="back-link" style="margin-top: 0.5rem;">
+      <a href="/">
+        <span>🏠</span>
+        <span>Voltar ao Cardápio</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<style>
+.alert {
+  padding: 1rem;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+}
+
+.alert-error {
+  background: #fee2e2;
+  border: 2px solid #ef4444;
+  color: #991b1b;
+}
+
+.alert p {
+  margin: 0.25rem 0;
+  font-size: 0.9rem;
+}
+
+.form-hint {
+  display: block;
+  font-size: 0.85rem;
+  color: #64748b;
+  margin-top: 0.25rem;
+}
+</style>
+
+</body>
+</html>

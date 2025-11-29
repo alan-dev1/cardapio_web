@@ -95,6 +95,6 @@ module.exports.adicionarProduto = (app, req, res) => {
         }
 
         console.log('Produto adicionado com sucesso! ID: ', result.insertId);
-        res.redirect('/');
+        res.redirect('/admin/gerenciar');
     });
 };
