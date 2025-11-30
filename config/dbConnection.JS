@@ -1,18 +1,15 @@
-// app/models/dbConnection.js
+require('dotenv').config();
 const mysql = require('mysql2');
 
-// Configurações de conexão com o banco de dados
-const host = 'localhost';
-const database = 'cardapio_restaurante'; // nome do seu banco
-const user = 'root'; // altere se necessário
-const password = ''; // coloque sua senha do MySQL, se tiver
-
-// Exporta a função que cria a conexão
 module.exports = () => {
     return mysql.createConnection({
-        host: host,
-        user: user,
-        password: password,
-        database: database
+        host: process.env.DB_HOST,
+        port: process.env.DB_PORT,
+        user: process.env.DB_USER,
+        password: process.env.DB_PASSWORD,
+        database: process.env.DB_NAME,
+        ssl: {
+            rejectUnauthorized: true
+        }
     });
 };
