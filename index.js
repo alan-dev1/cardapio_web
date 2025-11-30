@@ -1,4 +1,6 @@
 // index.js
+require('dotenv').config(); // ← ADICIONE ESTA LINHA NO TOPO!
+
 const express = require('express');
 const session = require('express-session');
 const routes = require('./app/routes/routes');
@@ -15,11 +17,12 @@ app.use(express.static('./public'));
 
 // Configuração de sessão
 app.use(session({
-    secret: 'seu-segredo-super-secreto-aqui', // MUDE ISSO em produção!
+    secret: process.env.SESSION_SECRET || 'seu-segredo-super-secreto-aqui', // ← MUDOU AQUI!
     resave: false,
     saveUninitialized: false,
     cookie: {
-        maxAge: 1000 * 60 * 60 * 24 // 24 horas
+        maxAge: 1000 * 60 * 60 * 24, // 24 horas
+        secure: process.env.NODE_ENV === 'production' // ← ADICIONE ESTA LINHA
     }
 }));
 
