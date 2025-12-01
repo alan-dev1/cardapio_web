@@ -1,5 +1,5 @@
 // index.js
-require('dotenv').config(); // ← ADICIONE ESTA LINHA NO TOPO!
+require('dotenv').config();
 
 const express = require('express');
 const session = require('express-session');
@@ -11,18 +11,23 @@ const app = express();
 app.set('view engine', 'ejs');
 app.set('views', './app/views');
 
+// IMPORTANTE: Trust proxy no Render
+app.set('trust proxy', 1); // ← ADICIONE ESTA LINHA!
+
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json()); // Para aceitar JSON (usado no DELETE)
+app.use(express.json());
 app.use(express.static('./public'));
 
 // Configuração de sessão
 app.use(session({
-    secret: process.env.SESSION_SECRET || 'seu-segredo-super-secreto-aqui', // ← MUDOU AQUI!
+    secret: process.env.SESSION_SECRET || 'seu-segredo-super-secreto-aqui',
     resave: false,
     saveUninitialized: false,
     cookie: {
         maxAge: 1000 * 60 * 60 * 24, // 24 horas
-        secure: process.env.NODE_ENV === 'production' // ← ADICIONE ESTA LINHA
+        secure: false, // ← MUDE PARA FALSE TEMPORARIAMENTE
+        httpOnly: true,
+        sameSite: 'lax' // ← ADICIONE ESTA LINHA
     }
 }));
 
@@ -38,7 +43,6 @@ app.use((req, res, next) => {
         '/localizacao': 'localizacao'
     };
     
-    // Rotas admin
     if (req.path.startsWith('/admin')) {
         res.locals.navActive = 'admin';
     } else {
@@ -57,5 +61,4 @@ routes.auth(app);
 routes.admin(app);
 routes.paginaNaoEncontrada(app);
 
-// Exporta o app
 module.exports = app;

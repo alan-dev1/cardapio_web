@@ -2,7 +2,12 @@
 
 // Middleware para verificar se usuário está autenticado
 module.exports.verificarAutenticacao = (req, res, next) => {
+    console.log('[AuthMiddleware] Verificando autenticação');
+    console.log('[AuthMiddleware] Session ID:', req.sessionID);
+    console.log('[AuthMiddleware] Usuário na sessão:', req.session.usuario);
+    
     if (req.session && req.session.usuario) {
+        console.log('[AuthMiddleware] Usuário autenticado:', req.session.usuario.email);
         return next();
     }
     
@@ -12,7 +17,10 @@ module.exports.verificarAutenticacao = (req, res, next) => {
 
 // Middleware para verificar se é admin
 module.exports.verificarAdmin = (req, res, next) => {
+    console.log('[AuthMiddleware] Verificando se é admin');
+    
     if (req.session && req.session.usuario && req.session.usuario.tipo === 'admin') {
+        console.log('[AuthMiddleware] Usuário é admin');
         return next();
     }
     
