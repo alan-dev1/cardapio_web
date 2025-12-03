@@ -7,7 +7,7 @@ module.exports.home = (app, req, res) => {
     const db = dbConn();
 
     // Busca 2 lanches
-    getProdutosPorCategoria(db, 'Lanches', 2, (error, lanches) => {
+    getProdutosPorCategoria(db, 'Lanches', 4, (error, lanches) => {
         if (error) {
             console.log('Erro ao buscar lanches:', error);
             res.send('Erro ao buscar lanches no banco de dados.');
@@ -15,7 +15,7 @@ module.exports.home = (app, req, res) => {
         }
 
         // Busca 2 bebidas
-        getProdutosPorCategoria(db, 'Bebidas', 2, (error, bebidas) => {
+        getProdutosPorCategoria(db, 'Bebidas', 4, (error, bebidas) => {
             if (error) {
                 console.log('Erro ao buscar bebidas:', error);
                 res.send('Erro ao buscar bebidas no banco de dados.');
